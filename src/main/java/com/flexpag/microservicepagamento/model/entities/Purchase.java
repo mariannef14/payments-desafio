@@ -20,10 +20,11 @@ public class Purchase extends BaseEntity{
 
     private Long invoiceAmount;
 
-    private Double fee;
+    private Double rate;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "cliente_id")
+    @JoinTable(name = "purchase_client", joinColumns = @JoinColumn(name = "purchase_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "client_id", referencedColumnName = "id"))
     private Client client;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -35,7 +36,7 @@ public class Purchase extends BaseEntity{
         this.setCreateAt(LocalDate.now());
         this.amount = purchaseDTO.amount();
         this.invoiceAmount = purchaseDTO.invoiceAmount();
-        this.fee = purchaseDTO.fee();
+        this.rate = purchaseDTO.rate();
         this.client = client;
     }
 }

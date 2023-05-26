@@ -39,9 +39,6 @@ public class PaymentsService {
         Client client = clientRepository.findById(purchaseDTO.clientId())
                 .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado!"));
 
-        /*Transaction transaction = transactionRepository.findById(purchaseDTO.transaction_id())
-                .orElseThrow(() -> new EntityNotFoundException("Transação não encontrada"));*/
-
         Purchase purchase = purchaseRepository.save(new Purchase(purchaseDTO, client));
 
         return purchase;

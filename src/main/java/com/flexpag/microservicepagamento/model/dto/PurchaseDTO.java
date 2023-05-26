@@ -6,7 +6,7 @@ public record PurchaseDTO(
 
         Long invoiceAmount,
 
-        Double fee,
+        Double rate,
 
         Long clientId) {}
 

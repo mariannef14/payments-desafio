@@ -22,7 +22,8 @@ public record ClientDTO(
         @NotBlank(message = "O campo não pode estar vazio")
         String password,
 
-        @NotBlank(message = "O campo não pode estar vazio") @Valid
+        @NotBlank(message = "O campo não pode estar vazio")
+        @Valid
         AddressDTO address,
 
         Long contractNumber) {

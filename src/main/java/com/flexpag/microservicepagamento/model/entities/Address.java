@@ -20,7 +20,6 @@ public class Address extends BaseEntity {
 
     public Address(AddressDTO addressDTO){
         this.street = addressDTO.street();
-        this.number = addressDTO.number();
         this.city = addressDTO.city();
         this.state = addressDTO.state();
         this.complement = addressDTO.complement();

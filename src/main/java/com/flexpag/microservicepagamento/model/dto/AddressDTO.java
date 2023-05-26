@@ -7,9 +7,6 @@ public record AddressDTO(
         String street,
 
         @NotBlank
-        String number,
-
-        @NotBlank
         String city,
 
         @NotBlank
