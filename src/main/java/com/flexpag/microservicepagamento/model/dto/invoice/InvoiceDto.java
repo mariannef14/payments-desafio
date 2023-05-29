@@ -1,11 +1,15 @@
-package com.flexpag.microservicepagamento.model.dto;
+package com.flexpag.microservicepagamento.model.dto.invoice;
 
 import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDate;
 
-public record InvoiceDTO(
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+
+public record InvoiceDto(
+
+@JsonFormat(pattern="dd/MM/yyyy")
         LocalDate dueDate,
 
         @NotBlank
@@ -13,7 +17,7 @@ public record InvoiceDTO(
 
         Long amount,
 
-        boolean paid,
+        Boolean paid,
 
         Long contractNumber) {
 }

@@ -1,6 +1,6 @@
 package com.flexpag.microservicepagamento.controller.api;
 
-import com.flexpag.microservicepagamento.model.dto.AddressDTO;
+import com.flexpag.microservicepagamento.model.dto.AddressDto;
 import com.flexpag.microservicepagamento.service.api.ViaCepService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +15,7 @@ public class ConsultaCepController {
 
     private final ViaCepService viaCepService;
     @GetMapping("/{cep}")
-    public AddressDTO consultaCep(@PathVariable String cep){
+    public AddressDto consultaCep(@PathVariable String cep){
         return viaCepService.consultaCep(cep);
     }
 }

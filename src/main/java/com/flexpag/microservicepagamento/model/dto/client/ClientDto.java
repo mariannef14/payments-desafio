@@ -1,12 +1,14 @@
-package com.flexpag.microservicepagamento.model.dto;
+package com.flexpag.microservicepagamento.model.dto.client;
 
+import com.flexpag.microservicepagamento.model.dto.AddressDto;
 import com.flexpag.microservicepagamento.model.enums.ContractTypeEnum;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.NotNull;
 
-public record ClientDTO(
+public record ClientDto(
+
         @NotBlank(message = "O campo não pode estar vazio")
         String name,
 
@@ -22,9 +24,9 @@ public record ClientDTO(
         @NotBlank(message = "O campo não pode estar vazio")
         String password,
 
-        @NotBlank(message = "O campo não pode estar vazio")
+        @NotNull(message = "O campo não pode estar vazio")
         @Valid
-        AddressDTO address,
-
+        AddressDto address,
+        
         Long contractNumber) {
 }

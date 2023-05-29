@@ -1,6 +1,6 @@
 package com.flexpag.microservicepagamento.model.entities;
 
-import com.flexpag.microservicepagamento.model.dto.AddressDTO;
+import com.flexpag.microservicepagamento.model.dto.AddressDto;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,10 +18,13 @@ public class Address extends BaseEntity {
     private String state;
     private String complement;
 
-    public Address(AddressDTO addressDTO){
-        this.street = addressDTO.street();
-        this.city = addressDTO.city();
-        this.state = addressDTO.state();
-        this.complement = addressDTO.complement();
+    public Address(AddressDto addressDto){
+
+        this.street = addressDto.street();
+        this.city = addressDto.city();
+        this.state = addressDto.state();
+        this.number = addressDto.number();
+        this.complement = addressDto.complement();
+        
     }
 }

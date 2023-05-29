@@ -1,13 +1,13 @@
 package com.flexpag.microservicepagamento.model.entities;
 
-import com.flexpag.microservicepagamento.model.dto.InvoiceDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.List;
+
+import com.flexpag.microservicepagamento.model.dto.invoice.InvoiceDto;
 
 @Entity
 @Getter
@@ -15,22 +15,25 @@ import java.util.List;
 @NoArgsConstructor
 public class Invoice extends BaseEntity{
 
-    private LocalDate dueDate = LocalDate.now();
+    private LocalDate dueDate;
 
     private String barcode;
 
     private Long amount;
 
-    private boolean paid;
+    private Boolean paid;
 
     private Long contractNumber;
+   
+    
+    public Invoice(InvoiceDto invoiceDto){
 
-    public Invoice(InvoiceDTO invoiceDTO){
         this.setCreateAt(LocalDate.now());
-        this.dueDate = invoiceDTO.dueDate();
-        this.barcode = invoiceDTO.barcode();
-        this.amount = invoiceDTO.amount();
-        this.paid = invoiceDTO.paid();
-        this.contractNumber = invoiceDTO.contractNumber();
+        this.dueDate = invoiceDto.dueDate();
+        this.barcode = invoiceDto.barcode();
+        this.amount = invoiceDto.amount();
+        this.paid = invoiceDto.paid();
+        this.contractNumber = invoiceDto.contractNumber();
+        
     }
 }
