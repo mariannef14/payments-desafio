@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public record InvoiceDto(
 
-@JsonFormat(pattern="dd/MM/yyyy")
+        @JsonFormat(pattern="dd/MM/yyyy")
         LocalDate dueDate,
 
         @NotBlank

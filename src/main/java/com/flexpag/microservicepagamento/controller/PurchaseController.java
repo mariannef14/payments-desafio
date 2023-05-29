@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("payments/client/purchase")
+@RequestMapping("payments/purchase")
 public class PurchaseController {
     
     private final PurchaseService purchaseService;

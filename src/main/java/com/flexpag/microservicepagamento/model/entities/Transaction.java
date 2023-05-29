@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.Random;
@@ -22,7 +23,8 @@ public class Transaction extends BaseEntity{
     private PaymentTypeEnum paymentType;
 
     @Enumerated(EnumType.STRING)
-    private StatusEnum status = StatusEnum.PENDING;
+    @Setter
+    private StatusEnum status;
 
     private Long authorizationCode;
 
@@ -35,12 +37,16 @@ public class Transaction extends BaseEntity{
 
         this.setCreateAt(LocalDate.now());
         this.paymentType = transactionDto.paymentType();
-        // Random random = new Random();
-        // Integer pos = random.nextInt(0, 3);
-        // this.status = StatusEnum.getPos(pos);//lógica randômica
+        this.status = StatusEnum.PENDING;
         this.authorizationCode = transactionDto.authorizationCode();
         this.installments = transactionDto.installments();
         this.purchase = purchase;
         
+    }
+
+    public StatusEnum getStatusEnum(){
+        StatusEnum[] values = StatusEnum.values();
+        int status = new Random().nextInt(StatusEnum.values().length);
+        return values[status];
     }
 }

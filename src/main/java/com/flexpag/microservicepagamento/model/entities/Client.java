@@ -9,7 +9,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -35,7 +38,7 @@ public class Client extends BaseEntity implements Assignment {
     private Long contractNumber;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Purchase> purchase;
+    private Set<Purchase> purchase;
 
     public Client(ClientDto clientDto){
 
@@ -47,6 +50,7 @@ public class Client extends BaseEntity implements Assignment {
         this.password = clientDto.password();
         this.address = new Address(clientDto.address());
         this.contractNumber = clientDto.contractNumber();
+        this.purchase = new HashSet<>();
 
     }
 

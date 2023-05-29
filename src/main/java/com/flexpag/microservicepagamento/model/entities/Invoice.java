@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 import com.flexpag.microservicepagamento.model.dto.invoice.InvoiceDto;
+import lombok.Setter;
 
 @Entity
 @Getter
@@ -21,6 +22,7 @@ public class Invoice extends BaseEntity{
 
     private Long amount;
 
+    @Setter
     private Boolean paid;
 
     private Long contractNumber;
