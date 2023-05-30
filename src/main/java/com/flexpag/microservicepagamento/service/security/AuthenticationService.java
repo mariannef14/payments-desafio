@@ -1,4 +1,4 @@
-package com.flexpag.microservicepagamento.service;
+package com.flexpag.microservicepagamento.service.security;
 
 import com.flexpag.microservicepagamento.model.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
