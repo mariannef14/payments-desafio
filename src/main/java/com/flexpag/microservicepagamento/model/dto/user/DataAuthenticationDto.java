@@ -1,4 +1,12 @@
 package com.flexpag.microservicepagamento.model.dto.user;
 
-public record DataAuthenticationDto(String login, String password) {
+import jakarta.validation.constraints.NotBlank;
+
+public record DataAuthenticationDto(
+
+        @NotBlank
+        String login,
+
+        @NotBlank
+        String password) {
 }

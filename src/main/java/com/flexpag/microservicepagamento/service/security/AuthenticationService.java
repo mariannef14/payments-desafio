@@ -1,6 +1,6 @@
 package com.flexpag.microservicepagamento.service.security;
 
-import com.flexpag.microservicepagamento.model.repository.UserRepository;
+import com.flexpag.microservicepagamento.model.repository.UserPaymentsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthenticationService implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private final UserPaymentsRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

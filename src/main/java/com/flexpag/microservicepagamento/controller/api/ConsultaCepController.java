@@ -3,6 +3,7 @@ package com.flexpag.microservicepagamento.controller.api;
 import com.flexpag.microservicepagamento.model.dto.AddressDto;
 import com.flexpag.microservicepagamento.service.api.ViaCepService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

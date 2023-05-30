@@ -1,5 +1,6 @@
 package com.flexpag.microservicepagamento.service;
 
+import com.flexpag.microservicepagamento.config.exceptions.EntittyNotFound;
 import org.springframework.stereotype.Service;
 
 import com.flexpag.microservicepagamento.model.dto.client.ClientDto;

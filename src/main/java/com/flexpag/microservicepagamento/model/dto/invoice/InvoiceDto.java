@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotNull;
 
 
 public record InvoiceDto(
@@ -15,9 +16,11 @@ public record InvoiceDto(
         @NotBlank
         String barcode,
 
+        @NotNull
         Long amount,
 
         Boolean paid,
 
+        @NotNull
         Long contractNumber) {
 }

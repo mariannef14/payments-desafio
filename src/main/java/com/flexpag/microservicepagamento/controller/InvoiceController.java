@@ -3,6 +3,7 @@ package com.flexpag.microservicepagamento.controller;
 import java.net.URI;
 import java.util.List;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,7 @@ public class InvoiceController {
     }
 
     @GetMapping("/{id}")
+    @Cacheable(value = "listaInvoices")
     public ResponseEntity<List<InvoiceResponseDto>> consultInvoice(@PathVariable Long id) {
        List<InvoiceResponseDto> invoice = invoiceService.consultInvoice(id);
        return ResponseEntity.ok(invoice);

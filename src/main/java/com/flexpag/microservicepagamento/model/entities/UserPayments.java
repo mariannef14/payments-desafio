@@ -2,6 +2,8 @@ package com.flexpag.microservicepagamento.model.entities;
 
 import java.util.Collection;
 import java.util.List;
+
+import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,10 +17,10 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User extends BaseEntity implements UserDetails{
+@EqualsAndHashCode(of = "id")
+public class UserPayments extends BaseEntity implements UserDetails{
 
     private String login;
-    private String username;
     private String password;
     
     
