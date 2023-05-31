@@ -1,6 +1,5 @@
 package com.flexpag.microservicepagamento.service;
 
-import com.flexpag.microservicepagamento.config.exceptions.EntittyNotFound;
 import org.springframework.stereotype.Service;
 
 import com.flexpag.microservicepagamento.model.dto.client.ClientDto;
@@ -24,7 +23,7 @@ public class ClientService {
 
     public ClientResponseDto consultClient(Long id){
         Client client = clientRepository.findById(id)
-        .orElseThrow(() -> new EntityNotFoundException("Cliente não existe"));
+        .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado"));
         return new ClientResponseDto(client);
     }
 }

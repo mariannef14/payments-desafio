@@ -1,7 +1,6 @@
 package com.flexpag.microservicepagamento.config.security;
 
 
-import com.flexpag.microservicepagamento.model.entities.UserPayments;
 import com.flexpag.microservicepagamento.model.repository.UserPaymentsRepository;
 import com.flexpag.microservicepagamento.service.security.TokenService;
 import jakarta.servlet.FilterChain;

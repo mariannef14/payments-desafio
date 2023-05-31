@@ -30,14 +30,16 @@ public class TransactionService {
         return new TransactionResponseDto(transaction);
     }
 
-//    public TransactionResponseDto consultInvoice(Long id) {
-//
-//        Transaction transaction = transactionRepository.findById(id).orElseThrow();
-//        transaction.setStatus(transaction.getStatusEnum());
-//        transaction.getPurchase().getInvoices().stream().map(((i) -> {
-//            if(status == )
-//            i.setPaid()
-//        }
-//        })).toList();
-//    }
+   public StatusEnum consultTransaction(Long id) {
+
+       Transaction transaction = transactionRepository.findById(id)
+       .orElseThrow( () -> new EntityNotFoundException("Transação não encontrada"));
+
+       transaction.setStatus(transaction.getStatusEnum());
+       if(transaction.getStatus().equals(StatusEnum.AUTHORIZED)){
+            transaction.getPurchase().getInvoices().stream().forEach( i -> i.setPaid(true));
+        }
+
+        return transaction.getStatus();
+   }
 }

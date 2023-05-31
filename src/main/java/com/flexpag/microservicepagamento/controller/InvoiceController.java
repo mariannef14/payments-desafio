@@ -35,7 +35,7 @@ public class InvoiceController {
     }
 
     @GetMapping("/{id}")
-    @Cacheable(value = "listaInvoices")
+    @Cacheable(value = "listInvoice")
     public ResponseEntity<List<InvoiceResponseDto>> consultInvoice(@PathVariable Long id) {
        List<InvoiceResponseDto> invoice = invoiceService.consultInvoice(id);
        return ResponseEntity.ok(invoice);

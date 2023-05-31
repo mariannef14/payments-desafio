@@ -16,6 +16,7 @@ public class ConsultaCepController {
 
     private final ViaCepService viaCepService;
     @GetMapping("/{cep}")
+    @Cacheable(value = "consultaCep")
     public AddressDto consultaCep(@PathVariable String cep){
         return viaCepService.consultaCep(cep);
     }

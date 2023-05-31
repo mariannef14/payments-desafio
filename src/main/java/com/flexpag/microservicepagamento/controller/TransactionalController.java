@@ -8,9 +8,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.flexpag.microservicepagamento.model.dto.transaction.TransactionDto;
 import com.flexpag.microservicepagamento.model.dto.transaction.TransactionResponseDto;
+import com.flexpag.microservicepagamento.model.enums.StatusEnum;
 import com.flexpag.microservicepagamento.service.TransactionService;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -31,9 +31,9 @@ public class TransactionalController {
         return ResponseEntity.created(uri).body(transaction);
     }
 
-//    @GetMapping("/")
-//    public ResponseEntity<TransactionResponseDto> consultTransaction(@PathVariable Long id){
-//        TransactionResponseDto transaction = transactionService.consultTransaction(id);
-//        return ResponseEntity.ok(transaction);
-//    }
+   @GetMapping("/")
+   public ResponseEntity<StatusEnum> consultTransaction(@PathVariable Long id){
+       StatusEnum transaction = transactionService.consultTransaction(id);
+       return ResponseEntity.ok(transaction);
+   }
 }

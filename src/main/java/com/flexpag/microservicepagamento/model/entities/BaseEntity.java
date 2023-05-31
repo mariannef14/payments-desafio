@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +18,7 @@ import java.util.UUID;
 @MappedSuperclass
 @Getter
 @Setter
+@EqualsAndHashCode(of = "id")
 public abstract class BaseEntity implements Serializable {
 
     private static final long serialVersionUID = -5926868552941669903L;
