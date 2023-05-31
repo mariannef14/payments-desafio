@@ -36,7 +36,7 @@ public class Client extends BaseEntity implements Assignment {
 
     private Long contractNumber;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Purchase> purchase;
 
     public Client(ClientDto clientDto){

@@ -16,11 +16,12 @@ public record PurchaseResponseDto(
 
     Long clientId,
     
-    List<Long> invoices_id){
+    List<Long> invoices_id)
+    {
 
     public PurchaseResponseDto(Purchase purchase) {
         this(purchase.getId(), purchase.getAmount(), purchase.getInvoiceAmount(), purchase.getRate(),
-         purchase.getClient().getId(), purchase.getInvoices().stream().map((p) -> p.getId()).toList());
+         purchase.getClient().getId(), purchase.getInvoices().stream().map(i -> i.getId()).toList());
     }
 }
 

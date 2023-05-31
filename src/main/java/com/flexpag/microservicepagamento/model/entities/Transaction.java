@@ -15,6 +15,7 @@ import java.util.Random;
 
 @Entity
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Transaction extends BaseEntity{
@@ -23,28 +24,27 @@ public class Transaction extends BaseEntity{
     private PaymentTypeEnum paymentType;
 
     @Enumerated(EnumType.STRING)
-    @Setter
     private StatusEnum status;
 
     private Long authorizationCode;
 
     private Integer installments;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Purchase purchase;
 
-    public Transaction(TransactionDto transactionDto, Purchase purchase){
+    public Transaction(TransactionDto transactionDto, Purchase purchase, StatusEnum status){
 
         this.setCreateAt(LocalDate.now());
         this.paymentType = transactionDto.paymentType();
-        this.status = StatusEnum.PENDING;
+        this.status = status;
         this.authorizationCode = transactionDto.authorizationCode();
         this.installments = transactionDto.installments();
         this.purchase = purchase;
         
     }
 
-    public StatusEnum getStatusEnum(){
+    public static StatusEnum getStatusEnum(){
         StatusEnum[] values = StatusEnum.values();
         int status = new Random().nextInt(StatusEnum.values().length);
         return values[status];

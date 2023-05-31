@@ -2,7 +2,7 @@ package com.flexpag.microservicepagamento.model.enums;
 
 public enum StatusEnum {
 
-    //PAID,
+    PAID,
     PENDING,
     AUTHORIZED,
     NOT_AUTHORIZED;

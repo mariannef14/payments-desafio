@@ -2,7 +2,10 @@ package com.flexpag.microservicepagamento.controller;
 
 import java.net.URI;
 
+import com.flexpag.microservicepagamento.model.entities.Transaction;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -15,25 +18,20 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("payments/purchase/transactional")
+@RequestMapping("payments/transaction")
 public class TransactionalController {
     
     private final TransactionService transactionService;
 
 
     @PostMapping("/cadastro")
-    //@Transactional
-    public ResponseEntity<TransactionResponseDto> cadastrarTransaction(@RequestBody TransactionDto transactionDTO,
+    @Transactional
+    public ResponseEntity<TransactionResponseDto> saveTransaction(@RequestBody @Valid TransactionDto transactionDto,
                                                             UriComponentsBuilder uriComponentsBuilder){
-        
-        TransactionResponseDto transaction = transactionService.saveTransaction(transactionDTO);
+
+        TransactionResponseDto transaction = transactionService.saveTransaction(transactionDto);
         URI uri = uriComponentsBuilder.path("/{id}").buildAndExpand(transaction.id()).toUri();
         return ResponseEntity.created(uri).body(transaction);
     }
 
-   @GetMapping("/")
-   public ResponseEntity<StatusEnum> consultTransaction(@PathVariable Long id){
-       StatusEnum transaction = transactionService.consultTransaction(id);
-       return ResponseEntity.ok(transaction);
-   }
 }

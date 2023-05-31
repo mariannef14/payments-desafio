@@ -1,5 +1,8 @@
 package com.flexpag.microservicepagamento.service;
 
+import com.flexpag.microservicepagamento.model.dto.invoice.InvoiceDto;
+import com.flexpag.microservicepagamento.model.dto.invoice.InvoiceResponseDto;
+import com.flexpag.microservicepagamento.model.entities.Invoice;
 import com.flexpag.microservicepagamento.model.enums.StatusEnum;
 import org.springframework.stereotype.Service;
 
@@ -21,25 +24,25 @@ public class TransactionService {
     
     private final PurchaseRepository purchaseRepository;
     private final TransactionRepository transactionRepository;
+
+    private final InvoiceService invoiceService;
     
     public TransactionResponseDto saveTransaction(TransactionDto transactionDto){
         Purchase purchase = purchaseRepository.findById(transactionDto.purchase_id())
         .orElseThrow(() -> new EntityNotFoundException("Pedido não encontrado!"));
 
-        Transaction transaction = transactionRepository.save(new Transaction(transactionDto, purchase));
+//        StatusEnum status = Transaction.getStatusEnum();
+
+//        StatusEnum status = StatusEnum.AUTHORIZED;
+
+//        if(status.equals(StatusEnum.AUTHORIZED)){
+//            System.out.println("authorized deu certo!");
+            //invoiceService.updateInvoices(purchase.getInvoices());
+//        }
+
+        Transaction transaction = transactionRepository.save(new Transaction(transactionDto, purchase, StatusEnum.AUTHORIZED));
+
         return new TransactionResponseDto(transaction);
     }
 
-   public StatusEnum consultTransaction(Long id) {
-
-       Transaction transaction = transactionRepository.findById(id)
-       .orElseThrow( () -> new EntityNotFoundException("Transação não encontrada"));
-
-       transaction.setStatus(transaction.getStatusEnum());
-       if(transaction.getStatus().equals(StatusEnum.AUTHORIZED)){
-            transaction.getPurchase().getInvoices().stream().forEach( i -> i.setPaid(true));
-        }
-
-        return transaction.getStatus();
-   }
 }

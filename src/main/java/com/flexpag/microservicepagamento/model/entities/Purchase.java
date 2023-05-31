@@ -22,12 +22,12 @@ public class Purchase extends BaseEntity{
 
     private Double rate;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "purchase_client", joinColumns = @JoinColumn(name = "purchase_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "client_id", referencedColumnName = "id"))
     private Client client;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "purchase_invoice", joinColumns = @JoinColumn(name = "purchase_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "invoice_id", referencedColumnName = "id"))
     private List<Invoice> invoices;

@@ -3,6 +3,7 @@ package com.flexpag.microservicepagamento.controller;
 import java.net.URI;
 import java.util.List;
 
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,7 @@ public class InvoiceController {
 
     
     @PostMapping(value = "/cadastro")
+    @CacheEvict(value = "listInvoice", allEntries = true)
     @Transactional
     public ResponseEntity<InvoiceResponseDto> saveInvoice(@RequestBody @Valid InvoiceDto invoiceDto,
                                                     UriComponentsBuilder uriComponentsBuilder) {
