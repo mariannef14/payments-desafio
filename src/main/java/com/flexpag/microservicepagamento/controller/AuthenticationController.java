@@ -3,7 +3,6 @@ package com.flexpag.microservicepagamento.controller;
 import com.flexpag.microservicepagamento.model.dto.security.TokenJWTDto;
 import com.flexpag.microservicepagamento.model.dto.user.DataAuthenticationDto;
 import com.flexpag.microservicepagamento.model.entities.UserPayments;
-import com.flexpag.microservicepagamento.service.UserPaymentsService;
 import com.flexpag.microservicepagamento.service.security.TokenService;
 
 import jakarta.validation.Valid;
@@ -26,7 +25,6 @@ public class AuthenticationController {
     private final AuthenticationManager authenticationManager;
 
     private final TokenService tokenService;
-    private final UserPaymentsService userPaymentsService;
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid DataAuthenticationDto dadosAuthenticationDto){
@@ -34,13 +32,5 @@ public class AuthenticationController {
         Authentication authentication = authenticationManager.authenticate(token);
         String tokenJWT = tokenService.gerarToken((UserPayments)  authentication.getPrincipal());
         return ResponseEntity.ok(new TokenJWTDto(tokenJWT));
-    }
-
-    @PostMapping("/cadastro/usuario")
-    public ResponseEntity<DataAuthenticationDto> saveUser(@RequestBody @Valid DataAuthenticationDto dataAuthenticationDto){
-
-        DataAuthenticationDto userPayments = userPaymentsService.saveUser(dataAuthenticationDto);
-
-        return ResponseEntity.ok(userPayments);
     }
 }
