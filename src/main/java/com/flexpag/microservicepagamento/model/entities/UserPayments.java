@@ -1,5 +1,6 @@
 package com.flexpag.microservicepagamento.model.entities;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+
 @Entity
 @Getter
 @AllArgsConstructor
@@ -21,13 +23,14 @@ public class UserPayments extends BaseEntity implements UserDetails{
 
     private String login;
     private String password;
-    
 
-    public UserPayments(DataAuthenticationDto dataAuthenticationDto){
-        this.login = dataAuthenticationDto.login();
-        this.password = dataAuthenticationDto.password();
 
-    }
+    // public UserPayments(DataAuthenticationDto dataAuthenticationDto){
+    //     this.setCreateAt(LocalDate.now());
+    //     this.login = dataAuthenticationDto.login();
+    //     this.password = passwordCryptografado;
+    // }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
@@ -42,7 +45,6 @@ public class UserPayments extends BaseEntity implements UserDetails{
     public String getUsername() {
         return login;
     }
-
 
     @Override
     public boolean isAccountNonExpired() {

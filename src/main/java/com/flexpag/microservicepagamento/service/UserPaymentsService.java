@@ -1,6 +1,5 @@
 package com.flexpag.microservicepagamento.service;
 
-import com.flexpag.microservicepagamento.config.security.SecurityConfigurations;
 import com.flexpag.microservicepagamento.model.dto.user.DataAuthenticationDto;
 import com.flexpag.microservicepagamento.model.entities.UserPayments;
 import com.flexpag.microservicepagamento.model.repository.UserPaymentsRepository;
