@@ -1,6 +1,6 @@
 package com.flexpag.microservicepagamento.model.entities;
 
-import com.flexpag.microservicepagamento.model.dto.ClientDTO;
+import com.flexpag.microservicepagamento.model.dto.client.ClientDto;
 import com.flexpag.microservicepagamento.model.enums.ContractTypeEnum;
 import com.flexpag.microservicepagamento.model.interfaces.Assignment;
 import jakarta.persistence.*;
@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -30,25 +31,28 @@ public class Client extends BaseEntity implements Assignment {
 
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Address address;
 
     private Long contractNumber;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Purchase> purchase;
 
-    public Client(ClientDTO clientDTO){
+    public Client(ClientDto clientDto){
+
         this.setCreateAt(LocalDate.now());
-        this.name = clientDTO.name();
-        this.identity = clientDTO.identity();
-        this.contract = clientDTO.contract();
-        this.email = clientDTO.email();
-        this.password = clientDTO.password();
-        this.address = new Address(clientDTO.address());
-        this.contractNumber = clientDTO.contractNumber();
+        this.name = clientDto.name();
+        this.identity = clientDto.identity();
+        this.contract = clientDto.contract();
+        this.email = clientDto.email();
+        this.password = clientDto.password();
+        this.address = new Address(clientDto.address());
+        this.contractNumber = clientDto.contractNumber();
+        this.purchase = new HashSet<>();
 
     }
+
     @Override
     public List<Double> getFees(ContractTypeEnum contractType) {
         return null;
