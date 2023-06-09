@@ -25,7 +25,7 @@ public class InvoiceController {
     private final InvoiceService invoiceService;
 
     
-    @PostMapping(value = "/cadastro")
+    @PostMapping(value = "/")
     @CacheEvict(value = "listInvoice", allEntries = true)
     @Transactional
     public ResponseEntity<InvoiceResponseDto> saveInvoice(@RequestBody @Valid InvoiceDto invoiceDto,

@@ -24,9 +24,9 @@ public class PurchaseController {
     private final PurchaseService purchaseService;
 
 
-    @PostMapping("/cadastro")
+    @PostMapping("/")
     @Transactional
-    public ResponseEntity<PurchaseResponseDto> cadastrarPurchase(@RequestBody PurchaseDto purchaseDto,
+    public ResponseEntity<PurchaseResponseDto> savePurchase(@RequestBody PurchaseDto purchaseDto,
                                                       UriComponentsBuilder uriComponentsBuilder) {
         
         PurchaseResponseDto purchase = purchaseService.savePurchase(purchaseDto);

@@ -26,6 +26,7 @@ public class Transaction extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private StatusEnum status;
 
+    @Column(unique = true)
     private Long authorizationCode;
 
     private Integer installments;

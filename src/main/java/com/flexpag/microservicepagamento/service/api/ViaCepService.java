@@ -8,12 +8,21 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class ViaCepService {
-    public AddressDto consultaCep(String cep) {
+    public AddressDto consultCep(String cep) {
+
+        if(!isValid(cep)){
+            throw new IllegalArgumentException("Cep inválido");
+        }
+
         RestTemplate restTemplate = new RestTemplate();
 
         ResponseEntity<AddressAPIDto> response = restTemplate.getForEntity(
                 String.format("https://viacep.com.br/ws/%s/json", cep), AddressAPIDto.class);
         return new AddressDto(response.getBody().logradouro(), response.getBody().localidade(),
                 response.getBody().uf(), "", response.getBody().complemento());
+    }
+
+    public boolean isValid(String cep){
+        return cep.matches("\\d{8}");
     }
 }

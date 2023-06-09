@@ -13,14 +13,15 @@ public record InvoiceDto(
         @JsonFormat(pattern="dd/MM/yyyy")
         LocalDate dueDate,
 
-        @NotBlank
+        @NotBlank(message = "Este campo não pode ser vazio ou nulo")
         String barcode,
 
-        @NotNull
+        @NotNull(message = "Este campo não pode ser nulo")
         Long amount,
 
+        @NotNull(message = "Este campo não pode ser nulo")
         Boolean paid,
 
-        @NotNull
+        @NotNull(message = "Este campo não pode ser nulo")
         Long contractNumber) {
 }

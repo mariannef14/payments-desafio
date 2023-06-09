@@ -18,6 +18,7 @@ public class Invoice extends BaseEntity{
 
     private LocalDate dueDate;
 
+    @Column(unique = true)
     private String barcode;
 
     private Long amount;

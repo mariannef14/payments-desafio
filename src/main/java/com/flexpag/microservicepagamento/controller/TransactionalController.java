@@ -24,7 +24,7 @@ public class TransactionalController {
     private final TransactionService transactionService;
 
 
-    @PostMapping("/cadastro")
+    @PostMapping("/")
     @Transactional
     public ResponseEntity<TransactionResponseDto> saveTransaction(@RequestBody @Valid TransactionDto transactionDto,
                                                             UriComponentsBuilder uriComponentsBuilder){

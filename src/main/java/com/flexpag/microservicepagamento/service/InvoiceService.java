@@ -33,14 +33,12 @@ public class InvoiceService {
 
         List<Invoice> invoices =  invoiceRepository.findAllByContractNumberAndPaidFalse(client.getContractNumber());
         
-        return invoices.stream().map((invoice) -> new InvoiceResponseDto(invoice)).toList();
+        return invoices.stream().map(InvoiceResponseDto::new).toList();
     }
 
     public List<Invoice> updateInvoices(List<Invoice> invoices) {
 
         invoices.forEach(invoice -> invoice.setPaid(true));
-
-        System.out.println(invoices);
 
         return invoices;
 

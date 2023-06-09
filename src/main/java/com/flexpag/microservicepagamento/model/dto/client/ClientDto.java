@@ -9,24 +9,26 @@ import jakarta.validation.constraints.NotNull;
 
 public record ClientDto(
 
-        @NotBlank(message = "O campo não pode estar vazio")
+        @NotBlank(message = "Este campo não pode ser vazio ou nulo")
         String name,
 
-        @NotBlank(message = "O campo não pode estar vazio")
+        @NotBlank(message = "Este campo não pode ser vazio ou nulo")
         String identity,
 
+        @NotNull(message = "Este campo não pode ser nulo")
         ContractTypeEnum contract,
 
         @Email(message = "Email inválido")
-        @NotBlank(message = "O campo não pode estar vazio")
+        @NotBlank(message = "Este campo não pode ser vazio ou nulo")
         String email,
 
-        @NotBlank(message = "O campo não pode estar vazio")
+        @NotBlank(message = "Este campo não pode ser vazio ou nulo")
         String password,
 
-        @NotNull(message = "O campo não pode estar vazio")
+        @NotNull(message = "Este campo não pode ser nulo")
         @Valid
         AddressDto address,
-        
+
+        @NotNull(message = "Este campo não pode ser nulo")
         Long contractNumber) {
 }

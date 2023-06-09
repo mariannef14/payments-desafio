@@ -27,7 +27,8 @@ public class SecurityConfigurations {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers(HttpMethod.POST, "/payments/login").permitAll();
-                    req.requestMatchers(HttpMethod.POST, "/payments/client/cadastro").permitAll();
+                    req.requestMatchers(HttpMethod.POST, "/payments/client/").permitAll();
+                    req.requestMatchers(HttpMethod.GET, "/cepapi/{cep}").permitAll();
                     req.anyRequest().authenticated();
                 })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

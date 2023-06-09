@@ -6,18 +6,18 @@ import java.util.List;
 
 public record PurchaseDto(
 
-        @NotNull
+        @NotNull(message = "Este campo não pode ser nulo")
         Long amount,
 
-        @NotNull
+        @NotNull(message = "Este campo não pode ser nulo")
         Long invoiceAmount,
 
-        @NotNull
+        @NotNull(message = "Este campo não pode ser nulo")
         Double rate,
 
-        @NotNull
+        @NotNull(message = "Este campo não pode ser nulo")
         Long clientId,
-        
+        @NotNull(message = "Este campo não pode ser nulo")
         List<Long> invoices_id) {}
 
 

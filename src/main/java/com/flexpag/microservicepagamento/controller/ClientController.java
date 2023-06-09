@@ -28,7 +28,7 @@ public class ClientController {
    
     private final ClientService clientService;
 
-    @PostMapping(value = "/cadastro")
+    @PostMapping(value = "/")
     @Transactional
     public ResponseEntity<ClientResponseDto> saveClient(@RequestBody @Valid ClientDto clientDto,
                                                   UriComponentsBuilder uriComponentsBuilder) {

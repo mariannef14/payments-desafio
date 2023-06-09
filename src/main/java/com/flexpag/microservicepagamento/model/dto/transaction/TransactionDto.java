@@ -5,14 +5,15 @@ import jakarta.validation.constraints.NotNull;
 
 public record TransactionDto(
 
+        @NotNull(message = "Este campo não pode ser nulo")
         PaymentTypeEnum paymentType,
 
-        @NotNull
+        @NotNull(message = "Este campo não pode ser nulo")
         Long authorizationCode,
 
-        @NotNull
+        @NotNull(message = "Este campo não pode ser nulo")
         Integer installments,
 
-        @NotNull
+        @NotNull(message = "Este campo não pode ser nulo")
         Long purchase_id) {
 }

@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/cepapi")
-public class ConsultaCepController {
+public class ConsultCepController {
 
     private final ViaCepService viaCepService;
     @GetMapping("/{cep}")
-    public AddressDto consultaCep(@PathVariable String cep){
-        return viaCepService.consultaCep(cep);
+    public AddressDto consultCep(@PathVariable String cep){
+        return viaCepService.consultCep(cep);
     }
 }

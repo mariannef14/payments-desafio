@@ -27,10 +27,10 @@ public class AuthenticationController {
     private final TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid DataAuthenticationDto dadosAuthenticationDto){
-        Authentication token = new UsernamePasswordAuthenticationToken(dadosAuthenticationDto.login(), dadosAuthenticationDto.password());
+    public ResponseEntity<TokenJWTDto> login(@RequestBody @Valid DataAuthenticationDto dataAuthenticationDto){
+        Authentication token = new UsernamePasswordAuthenticationToken(dataAuthenticationDto.login(), dataAuthenticationDto.password());
         Authentication authentication = authenticationManager.authenticate(token);
-        String tokenJWT = tokenService.gerarToken((UserPayments)  authentication.getPrincipal());
+        String tokenJWT = tokenService.generateToken((UserPayments)  authentication.getPrincipal());
         return ResponseEntity.ok(new TokenJWTDto(tokenJWT));
     }
 }

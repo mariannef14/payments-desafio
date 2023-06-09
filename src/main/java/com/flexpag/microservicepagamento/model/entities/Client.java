@@ -21,6 +21,7 @@ public class Client extends BaseEntity implements Assignment {
 
     private  String name;
 
+    @Column(unique = true)
     private  String identity;
 
     @Enumerated(EnumType.STRING)
@@ -34,6 +35,7 @@ public class Client extends BaseEntity implements Assignment {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Address address;
 
+    @Column(unique = true)
     private Long contractNumber;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

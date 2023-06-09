@@ -4,9 +4,9 @@ import jakarta.validation.constraints.NotBlank;
 
 public record DataAuthenticationDto(
 
-        @NotBlank
+        @NotBlank(message = "Este campo não pode ser vazio ou nulo")
         String login,
 
-        @NotBlank
+        @NotBlank(message = "Este campo não pode ser vazio ou nulo")
         String password) {
 }
