@@ -17,6 +17,7 @@ public record PurchaseDto(
 
         @NotNull(message = "Este campo não pode ser nulo")
         Long clientId,
+        
         @NotNull(message = "Este campo não pode ser nulo")
         List<Long> invoices_id) {}
 

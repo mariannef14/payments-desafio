@@ -2,7 +2,6 @@ package com.flexpag.microservicepagamento.controller;
 
 import java.net.URI;
 
-import com.flexpag.microservicepagamento.model.entities.Transaction;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +10,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.flexpag.microservicepagamento.model.dto.transaction.TransactionDto;
 import com.flexpag.microservicepagamento.model.dto.transaction.TransactionResponseDto;
-import com.flexpag.microservicepagamento.model.enums.StatusEnum;
 import com.flexpag.microservicepagamento.service.TransactionService;
 
 import lombok.RequiredArgsConstructor;
