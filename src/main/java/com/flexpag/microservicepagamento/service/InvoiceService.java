@@ -41,6 +41,5 @@ public class InvoiceService {
         invoices.forEach(invoice -> invoice.setPaid(true));
 
         return invoices;
-
     }
 }

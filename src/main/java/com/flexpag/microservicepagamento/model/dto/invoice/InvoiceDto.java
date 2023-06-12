@@ -11,7 +11,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record InvoiceDto(
 
-        @Future(message = "Insira uma data posteiror a de hoje")
+        @Future(message = "Insira uma data posterior a de hoje")
         @JsonFormat(pattern="dd/MM/yyyy")
         @NotNull(message = "Este campo não pode ser nulo")
         LocalDate dueDate,

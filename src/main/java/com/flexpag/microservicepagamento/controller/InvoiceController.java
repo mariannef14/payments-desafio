@@ -36,9 +36,9 @@ public class InvoiceController {
         return ResponseEntity.created(uri).body(invoice);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/")
     @Cacheable(value = "listInvoice")
-    public ResponseEntity<List<InvoiceResponseDto>> consultInvoice(@PathVariable Long id) {
+    public ResponseEntity<List<InvoiceResponseDto>> consultInvoice(@RequestParam Long id) {
        List<InvoiceResponseDto> invoice = invoiceService.consultInvoice(id);
        return ResponseEntity.ok(invoice);
     }

@@ -2,6 +2,7 @@ package com.flexpag.microservicepagamento.config.exceptions.handler;
 
 import com.flexpag.microservicepagamento.config.exceptions.DataValidationExceptionDto;
 
+import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;
@@ -35,6 +36,12 @@ public class ExceptionsHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(IllegalArgumentException.class)
     public final String handlerErrorCepNotFound(IllegalArgumentException ex){
+        return ex.getMessage();
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(EntityExistsException.class)
+    public final String handlerErrorEntityExists(EntityExistsException ex){
         return ex.getMessage();
     }
 }
