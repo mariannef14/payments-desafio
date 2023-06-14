@@ -11,5 +11,4 @@ public class MicroservicePagamentoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MicroservicePagamentoApplication.class, args);
 	}
-
 }

@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 
@@ -29,6 +28,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.net.URI;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -82,25 +83,8 @@ public class InvoiceControllerTest {
 
 
     @Test
-    @DisplayName("Ao buscar um cliente, que não está cadastrado, através do se id deve ser retornando um status 404")
-    @WithMockUser
-    public void shoulReturnNotFoundWhenFindClient() throws Exception {
-
-        URI uri = new URI("/payments/invoice/");
-
-//        when(invoiceService.consultInvoice(anyLong())).thenReturn();
-
-        var response = mockMvc.perform(
-                MockMvcRequestBuilders.get(uri)
-                        .param("id", "20L"))
-                        .andReturn().getResponse();
-
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.NOT_FOUND.value());
-    }
-
-
-    @Test
     @DisplayName(value = "Ao buscar um cliente, que não está cadastrado, através do seu id, uma exceção deve ser lançada")
+    @WithMockUser
     public void shouldReturnExceptionWhenFindClient() throws Exception {
 
         URI uri = new URI("/payments/invoice/");
@@ -109,10 +93,30 @@ public class InvoiceControllerTest {
 
         var response = mockMvc.perform(
                 MockMvcRequestBuilders.get(uri)
-                        .param("id", "20L"))
+                        .param("id", "20"))
                 .andReturn().getResponse();
 
         assertThrows(EntityNotFoundException.class, () -> invoiceService.consultInvoice(20L));
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.NOT_FOUND.value());
+    }
+
+    @Test
+    @DisplayName(value = "Ao buscar um cliente, que não está cadastrado, através do seu id, uma exceção deve ser lançada")
+    @WithMockUser
+    public void shouldReturnOkWhenFindInvoiceByClient() throws Exception {
+
+        URI uri = new URI("/payments/invoice/");
+        List<InvoiceResponseDto> invoices = new ArrayList<>();
+        invoices.add(new InvoiceResponseDto(null, LocalDate.now().plusDays(5),
+                100L, false, 30L));
+
+        when(invoiceService.consultInvoice(anyLong())).thenReturn(invoices);
+
+        var response = mockMvc.perform(MockMvcRequestBuilders.get(uri)
+                .param("id", "28"))
+                .andReturn().getResponse();
+
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
     }
 
 }

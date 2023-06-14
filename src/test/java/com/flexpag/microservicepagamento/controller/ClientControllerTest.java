@@ -35,7 +35,7 @@ import java.net.URI;
 @AutoConfigureMockMvc
 @AutoConfigureJsonTesters
 @ActiveProfiles(value = "test")
-public class ClientControllerTest {
+class ClientControllerTest {
 
     @MockBean
     private ClientService clientService;
@@ -52,7 +52,7 @@ public class ClientControllerTest {
 
     @Test
     @DisplayName(value = "Ao enviar informações válidas do cliente, deve ser retornado um status 200")
-    public void shouldReturnOkWhenSaveClient() throws Exception{
+    void shouldReturnOkWhenSaveClient() throws Exception{
 
         when(clientService.saveClient(any())).thenReturn(new ClientResponseDto(null, "Marianne","123456789",
                 "marianne@gmail.com", "teste",
@@ -89,24 +89,6 @@ public class ClientControllerTest {
 
     }
 
-    @Test
-    @DisplayName(value = "Ao buscar um cliente, que não está cadastrado, através do seu id, deve retornado o status 404")
-    @WithMockUser
-    public void shouldReturnNotFoundWhenFindClient() throws Exception{
-
-        URI uri = new URI("/payments/client/");
-
-        when(clientService.consultClient(anyLong())).thenReturn(null);
-
-
-        var response = mockMvc.perform(
-                        MockMvcRequestBuilders.get(uri)
-                                .param("id", "32L"))
-                .andReturn().getResponse();
-
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.NOT_FOUND.value());
-
-    }
 
     @Test
     @DisplayName(value = "Ao buscar um cliente, que não está cadastrado, através do seu id, uma exceção deve ser lançada")
@@ -121,11 +103,13 @@ public class ClientControllerTest {
 
         var response = mockMvc.perform(
                         MockMvcRequestBuilders.get(uri)
-                                .param("id", "32L"))
+                                .param("id", "32"))
                                 .andReturn().getResponse();
 
         assertThrows(EntityNotFoundException.class, () -> clientService.consultClient(32L));
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.NOT_FOUND.value());
     }
+
 
     @Test
     @DisplayName("Ao buscar um cliente cadastrado no banco, um status 200 deve ser retornado")
@@ -142,10 +126,9 @@ public class ClientControllerTest {
 
         var response = mockMvc.perform(
                         MockMvcRequestBuilders.get(uri)
-                                .param("id", "28L"))
+                                .param("id", "28"))
                         .andReturn().getResponse();
 
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-
     }
 }
