@@ -51,10 +51,11 @@ class ClientControllerTest {
 
 
     @Test
-    @DisplayName(value = "Ao enviar informações válidas do cliente, deve ser retornado um status 200")
+    @DisplayName(value = "Ao enviar informações válidas de um cliente, deve ser retornado um status 201")
     void shouldReturnOkWhenSaveClient() throws Exception{
 
-        when(clientService.saveClient(any())).thenReturn(new ClientResponseDto(null, "Marianne","123456789",
+        when(clientService.saveClient(any())).thenReturn(
+                new ClientResponseDto(null, "Marianne","123456789",
                 "marianne@gmail.com", "teste",
                 new AddressDto("Av Um", "Jaboatao", "Pernambuco", "402", ""),
                 30L, null ));
@@ -93,7 +94,7 @@ class ClientControllerTest {
     @Test
     @DisplayName(value = "Ao buscar um cliente, que não está cadastrado, através do seu id, uma exceção deve ser lançada")
     @WithMockUser
-    public void shouldReturnExceptionWhenFindClient() throws Exception{
+    void shouldReturnExceptionWhenFindClientNotExist() throws Exception{
 
         URI uri = new URI("/payments/client/");
 
@@ -114,7 +115,7 @@ class ClientControllerTest {
     @Test
     @DisplayName("Ao buscar um cliente cadastrado no banco, um status 200 deve ser retornado")
     @WithMockUser
-    public void shoudReturnOkWhenFindClient() throws Exception {
+    void shoudReturnOkWhenFindClient() throws Exception {
 
         URI uri = new URI("/payments/client/");
 

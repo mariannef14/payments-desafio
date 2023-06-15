@@ -51,12 +51,13 @@ public class InvoiceControllerTest {
 
 
     @Test
-    @DisplayName("Ao enviar informações válidas do cliente, deve ser retornado um status 200")
+    @DisplayName("Ao enviar informações válidas de uma invoice, deve ser retornado um status 201")
     @WithMockUser
-    public void shouldReturnOkWhenSaveInvoice()throws Exception{
+    void shouldReturnOkWhenSaveInvoice() throws Exception{
 
-        when(invoiceService.saveInvoice(any())).thenReturn(new InvoiceResponseDto(null, LocalDate.now().plusDays(5),
-                100L, false, 30L));
+        when(invoiceService.saveInvoice(any())).thenReturn(
+                new InvoiceResponseDto(null, LocalDate.now().plusDays(5),
+                        100L, false, 30L));
 
 
         URI uri = new URI("/payments/invoice/");
@@ -67,7 +68,7 @@ public class InvoiceControllerTest {
         var response = mockMvc.perform(MockMvcRequestBuilders.post(uri)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(invoiceDtoJson.write(invoiceDto).getJson()))
-                .andReturn().getResponse();
+                        .andReturn().getResponse();
 
 
         assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
@@ -83,13 +84,14 @@ public class InvoiceControllerTest {
 
 
     @Test
-    @DisplayName(value = "Ao buscar um cliente, que não está cadastrado, através do seu id, uma exceção deve ser lançada")
+    @DisplayName(value = "Ao buscar um cliente para ter acesso a sua lista de invoices, que não está cadastrado, através do seu id, uma exceção deve ser lançada")
     @WithMockUser
-    public void shouldReturnExceptionWhenFindClient() throws Exception {
+    void shouldReturnExceptionWhenFindClientNotExist() throws Exception {
 
         URI uri = new URI("/payments/invoice/");
 
         when(invoiceService.consultInvoice(anyLong())).thenThrow(EntityNotFoundException.class);
+
 
         var response = mockMvc.perform(
                 MockMvcRequestBuilders.get(uri)
@@ -101,9 +103,9 @@ public class InvoiceControllerTest {
     }
 
     @Test
-    @DisplayName(value = "Ao buscar um cliente, que não está cadastrado, através do seu id, uma exceção deve ser lançada")
+    @DisplayName(value = "Ao buscar um cliente para ter acesso a sua lista de invoices, que está cadastrado, deve ser retornado um status 200")
     @WithMockUser
-    public void shouldReturnOkWhenFindInvoiceByClient() throws Exception {
+    void shouldReturnOkWhenFindInvoiceByClient() throws Exception {
 
         URI uri = new URI("/payments/invoice/");
         List<InvoiceResponseDto> invoices = new ArrayList<>();

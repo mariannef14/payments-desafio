@@ -2,6 +2,7 @@ package com.flexpag.microservicepagamento.controller;
 
 import java.net.URI;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +27,7 @@ public class PurchaseController {
 
     @PostMapping("/")
     @Transactional
-    public ResponseEntity<PurchaseResponseDto> savePurchase(@RequestBody PurchaseDto purchaseDto,
+    public ResponseEntity<PurchaseResponseDto> savePurchase(@RequestBody @Valid PurchaseDto purchaseDto,
                                                       UriComponentsBuilder uriComponentsBuilder) {
         
         PurchaseResponseDto purchase = purchaseService.savePurchase(purchaseDto);
